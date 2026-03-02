@@ -24,15 +24,7 @@ import junit.framework.TestSuite;
 import org.eclipse.persistence.internal.sessions.AbstractSession;
 import org.eclipse.persistence.sessions.DatabaseSession;
 import org.eclipse.persistence.testing.framework.jpa.junit.JUnitTestCase;
-import org.eclipse.persistence.testing.models.jpa.advanced.AdvancedTableCreator;
-import org.eclipse.persistence.testing.models.jpa.advanced.Employee;
-import org.eclipse.persistence.testing.models.jpa.advanced.EmployeePopulator;
-import org.eclipse.persistence.testing.models.jpa.advanced.PhoneNumber;
-import org.eclipse.persistence.testing.models.jpa.advanced.PhoneNumberPK;
-import org.eclipse.persistence.testing.models.jpa.advanced.Vegetable;
-import org.eclipse.persistence.testing.models.jpa.advanced.VegetablePK;
-import org.eclipse.persistence.testing.models.jpa.advanced.VegetableRecord;
-import org.eclipse.persistence.testing.models.jpa.advanced.VegetablePKRecord;
+import org.eclipse.persistence.testing.models.jpa.advanced.*;
 import org.eclipse.persistence.testing.tests.jpa.jpql.JUnitDomainObjectComparer;
 
 /**
@@ -58,8 +50,9 @@ public class JUnitJPQLFunctionsTest extends JUnitTestCase {
 
     private final String VEGETABLE_NAME = "Carrot";
     private final String VEGETABLE_COLOR = "Orange";
+    private final VegetableRecordSize VEGETABLE_SIZE = VegetableRecordSize.SMALL;
     private final VegetablePK VEGETABLE_ID = new VegetablePK(VEGETABLE_NAME, VEGETABLE_COLOR);
-    private final VegetablePKRecord VEGETABLE_RECORD_ID = new VegetablePKRecord(VEGETABLE_NAME, VEGETABLE_COLOR);
+    private final VegetablePKRecord VEGETABLE_RECORD_ID = new VegetablePKRecord(VEGETABLE_NAME, VEGETABLE_COLOR, VEGETABLE_SIZE);
     private final double VEGETABLE_COST = 99999.99;
 
     public JUnitJPQLFunctionsTest() {
@@ -269,9 +262,10 @@ public class JUnitJPQLFunctionsTest extends JUnitTestCase {
     public void queryID10CompositePKTestWithIdClassRecord(){
         EntityManager em = createEntityManager();
         TypedQuery<VegetablePKRecord> query = em.createQuery(
-                "SELECT ID(this) FROM VegetableRecord WHERE this.name = :nameParam AND this.color = :colorParam", VegetablePKRecord.class);
+                "SELECT ID(this) FROM VegetableRecord WHERE this.name = :nameParam AND this.color = :colorParam AND this.size = :sizeParam", VegetablePKRecord.class);
         query.setParameter("nameParam", VEGETABLE_NAME);
         query.setParameter("colorParam", VEGETABLE_COLOR);
+        query.setParameter("sizeParam", VEGETABLE_SIZE);
         VegetablePKRecord result = query.getSingleResult();
         assertNotNull(result);
         assertEquals(VEGETABLE_RECORD_ID, result);
