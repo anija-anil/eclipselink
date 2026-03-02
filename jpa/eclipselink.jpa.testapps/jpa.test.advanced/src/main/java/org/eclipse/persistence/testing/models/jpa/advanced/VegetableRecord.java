@@ -28,6 +28,7 @@ import java.io.Serializable;
 public class VegetableRecord implements Serializable {
     private String name;
     private String color;
+    private VegetableRecordSize size;
     private double cost;
     private String[] tags;
     private char type = '0';
@@ -46,6 +47,12 @@ public class VegetableRecord implements Serializable {
         return color;
     }
 
+    @Id
+    @Column(name="VEGETABLE_SIZE")
+    public VegetableRecordSize getSize() {
+        return size;
+    }
+
     public double getCost() {
         return cost;
     }
@@ -61,6 +68,10 @@ public class VegetableRecord implements Serializable {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public void setSize(VegetableRecordSize size) {
+        this.size = size;
     }
 
     public void setType(char aType) {

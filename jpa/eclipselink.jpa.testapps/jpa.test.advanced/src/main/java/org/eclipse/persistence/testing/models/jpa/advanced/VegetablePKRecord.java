@@ -16,4 +16,4 @@ package org.eclipse.persistence.testing.models.jpa.advanced;
 
 import java.io.Serializable;
 
-public record VegetablePKRecord(String name, String color) implements Serializable {}
+public record VegetablePKRecord(String name, String color, VegetableRecordSize size) implements Serializable {}

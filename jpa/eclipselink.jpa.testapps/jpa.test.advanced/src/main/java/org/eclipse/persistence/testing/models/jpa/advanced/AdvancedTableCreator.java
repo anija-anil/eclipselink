@@ -2005,6 +2005,16 @@ public class AdvancedTableCreator extends TogglingFastTableCreator {
         fieldCOLOR.setIsPrimaryKey(true);
         table.addField(fieldCOLOR);
 
+        FieldDefinition fieldSIZE = new FieldDefinition();
+        fieldSIZE.setName("VEGETABLE_SIZE");
+        fieldSIZE.setTypeName("NUMERIC");
+        fieldSIZE.setSize(10);
+        fieldSIZE.setIsPrimaryKey(false);
+        fieldSIZE.setIsIdentity(false);
+        fieldSIZE.setUnique(false);
+        fieldSIZE.setShouldAllowNull(false);
+        table.addField(fieldSIZE);
+
         FieldDefinition fieldCOST = new FieldDefinition();
         fieldCOST.setName("COST");
         fieldCOST.setTypeName("DOUBLE PRECIS");
